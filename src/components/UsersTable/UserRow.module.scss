@@ -1,0 +1,38 @@
+@use '../../styles/abstracts/colors' as *;
+
+.user {
+  height: 64px;
+  margin: 5px;
+  padding: 0px 8px;
+  background-color: $user-bg;
+  border: 1px solid $border-main;
+  border-radius: 12px;
+  border-style: solid;
+  .portrait {
+    width: 34px;
+    border: 2px solid $border-orange;
+    border-radius: 50%;
+    margin-right: 13px;
+  }
+  .profile {
+    display: flex;
+    align-items: center;
+    height: 64px;
+  }
+  td {
+    white-space: nowrap;
+    border: solid 1px $border-main;
+    border-style: solid none;
+    padding: 10px;
+    &:first-child {
+      border-left-style: solid;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+    &:last-child {
+      border-right-style: solid;
+      border-bottom-right-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+  }
+}

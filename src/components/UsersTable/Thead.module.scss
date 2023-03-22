@@ -1,0 +1,11 @@
+@use '../../styles/abstracts/colors' as *;
+
+.thead {
+  * {
+    color: $font-mute;
+    font-weight: 400;
+  }
+  th {
+    padding: 5px 12px;
+  }
+}

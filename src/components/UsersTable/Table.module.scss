@@ -1,0 +1,26 @@
+@use '../../styles/abstracts/colors' as *;
+
+.container {
+  max-width: 1376px;
+  background-color: $container-bg;
+  border-radius: 40px;
+  border: 1px solid $border-main;
+  margin: 32px;
+  overflow-x: auto;
+  .table {
+    margin: 24px 32px;
+    padding: 5px 12px;
+    border-collapse: separate;
+    border-spacing: 0px 8px;
+    width: 100%;
+    min-height: 604px;
+    background-color: $bg-dark;
+    border-radius: 16px;
+    tbody {
+      width: 100%;
+    }
+  }
+  th {
+    text-align: start;
+  }
+}
