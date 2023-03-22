@@ -24,3 +24,9 @@
     text-align: start;
   }
 }
+
+@media screen and (min-width: 1376px) {
+  .container {
+    overflow: hidden;
+  }
+}
