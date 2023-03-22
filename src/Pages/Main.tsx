@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-const Main: FC = (props) => {
-  return <div>Main</div>;
+const Main: FC = () => {
+  return <div className="main">Main</div>;
 };
 
 export default Main;

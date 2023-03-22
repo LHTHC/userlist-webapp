@@ -1,11 +1,17 @@
-@use "./styles/reset.scss";
+@use './styles/reset.scss';
+@use './styles/abstracts/colors' as *;
 
 @font-face {
-  font-family: "Jura";
+  font-family: 'Jura';
   src: url(./assets/fonts/Jura.ttf);
 }
 
 * {
-  font-family: "Jura";
+  font-family: 'Jura';
   font-size: 14px;
+  color: $font-main;
+}
+
+body {
+  background-color: $body-bg;
 }
