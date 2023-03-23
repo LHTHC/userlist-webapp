@@ -2,20 +2,24 @@ import { FC, useState } from 'react';
 import { useQuery } from 'react-query';
 import getUsersData from '../../api/usersApi';
 import { natOptions, genderOptions } from '../../data/filterData';
+import filterSearch from '../../utils/searchFilter';
+import spinner from '../../assets/svg/spinner.svg';
 
 import styles from './Table.module.scss';
 
-import { User } from '../../types/users';
+import { IUsers, User } from '../../types/users';
 
 import Thead from './Thead';
 import UserRow from './UserRow';
 import Select from '../Select/Select';
+import Search from '../Search/Search';
 
 const Table: FC = () => {
   const [nationality, setNationality] = useState<
     (typeof natOptions)[0] | undefined
   >();
   const [gender, setGender] = useState<(typeof genderOptions)[0] | undefined>();
+  const [search, setSearch] = useState<string | undefined>('');
 
   const {
     data: usersData,
@@ -25,9 +29,14 @@ const Table: FC = () => {
     queryKey: ['users', nationality],
     queryFn: () => getUsersData(nationality),
     select: (data) => {
-      const copy = structuredClone(data);
+      const copy: IUsers = structuredClone(data);
       if (gender) {
-        copy.results = data.results.filter((user) => user.gender === gender.value);
+        copy.results = copy.results.filter((user) => user.gender === gender.value);
+      }
+      if (search?.length) {
+        copy.results = copy.results.filter((user) => {
+          return filterSearch(search, user.name.first, user.name.last);
+        });
       }
       return copy;
     },
@@ -44,6 +53,7 @@ const Table: FC = () => {
 
   return (
     <div className={styles.container}>
+      <Search value={search} onChange={setSearch} placeholder="Search" />
       <div className={styles.filters}>
         <Select
           options={natOptions}
@@ -67,7 +77,9 @@ const Table: FC = () => {
         <tbody className={styles.tbody}>
           {usersIsLoading && (
             <tr>
-              <td>Loading</td>
+              <td>
+                <img src={spinner} alt="Loading Spinner" />
+              </td>
             </tr>
           )}
           {usersData &&

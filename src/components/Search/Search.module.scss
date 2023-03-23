@@ -1,0 +1,27 @@
+@use '../../styles/abstracts/colors' as *;
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 305px;
+  height: 60px;
+  margin-top: 5px;
+  margin-bottom: 24px;
+  border-radius: 15px;
+  background-color: $bg-dark;
+  input {
+    background: none;
+    padding-left: 16px;
+    border: none;
+    width: 80%;
+    height: 100%;
+    &:focus {
+      outline: none;
+    }
+  }
+  img {
+    height: 18px;
+    margin-right: 18px;
+  }
+}
