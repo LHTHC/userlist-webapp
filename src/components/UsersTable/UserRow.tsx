@@ -12,7 +12,11 @@ const UserRow: FC<UserRowProps> = ({ user }) => {
   return (
     <tr key={phone} className={styles.user}>
       <td className={styles.profile}>
-        <img src={user.picture.thumbnail} alt="portrait" className={styles.portrait} />
+        <img
+          src={user.picture.thumbnail}
+          alt="portrait"
+          className={styles.portrait}
+        />
         <span className={styles.name}>{`${name.first} ${name.last}`}</span>
       </td>
       <td>{location.city}</td>

@@ -13,6 +13,7 @@
     border-collapse: separate;
     border-spacing: 0px 8px;
     width: 100%;
+    max-width: 1310px;
     min-height: 604px;
     background-color: $bg-dark;
     border-radius: 16px;
@@ -25,7 +26,7 @@
   }
 }
 
-@media screen and (min-width: 1376px) {
+@media screen and (min-width: 1440px) {
   .container {
     overflow: hidden;
   }

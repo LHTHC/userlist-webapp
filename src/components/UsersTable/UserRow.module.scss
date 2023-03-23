@@ -20,6 +20,7 @@
     height: 64px;
   }
   td {
+    min-width: max-content;
     white-space: nowrap;
     border: solid 1px $border-main;
     border-style: solid none;
