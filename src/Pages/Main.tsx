@@ -1,6 +1,4 @@
-import { FC, useState } from 'react';
-import { useQuery } from 'react-query';
-import getUsersData from '../api/usersApi';
+import { FC } from 'react';
 
 import Table from '../components/UsersTable/Table';
 
