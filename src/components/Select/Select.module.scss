@@ -27,15 +27,24 @@
   }
   .clear-btn {
     background: none;
+    padding: 0;
     color: #777;
     border: none;
     outline: none;
     cursor: pointer;
-    font-size: 35px;
-    line-height: 55px;
-    &:focus,
+    font-size: 30px;
     &:hover {
       color: #333;
+    }
+  }
+  .caret {
+    width: 10px;
+    translate: -10px 1%;
+    border: 0.3em solid transparent;
+    border-bottom-color: $font-mute;
+    &.open {
+      translate: -10px 50%;
+      transform: rotate(180deg);
     }
   }
   .options {
@@ -52,6 +61,11 @@
     top: calc(100% + 0.25em);
     background-color: $options-background;
     z-index: 100;
+    &.top {
+      left: 0;
+      top: auto;
+      bottom: calc(100% + 0.25em);
+    }
     div {
       width: 60%;
       border-bottom: 1px solid $font-mute;

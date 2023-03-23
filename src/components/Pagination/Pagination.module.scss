@@ -1,0 +1,26 @@
+@use '../../styles/abstracts/colors' as *;
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 400;
+  button {
+    width: 36px;
+    height: 36px;
+    font-weight: 300;
+    background: none;
+    border: none;
+    border: 1px solid $pagination-border;
+    box-shadow: inset 0px 4px 12px -4px $pagination-shadow;
+    border-radius: 50%;
+    opacity: 0.5;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

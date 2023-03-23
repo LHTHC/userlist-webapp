@@ -9,13 +9,19 @@ type SelectOption = {
 type SelectProps = {
   options: SelectOption[];
   value: SelectOption | undefined;
-  placeholder: string;
+  placeholder?: string;
+  topDirection?: boolean;
   onChange: (value: SelectOption | undefined) => void;
 };
 
-const Select: FC<SelectProps> = ({ value, onChange, options, placeholder }) => {
+const Select: FC<SelectProps> = ({
+  value,
+  onChange,
+  options,
+  placeholder,
+  topDirection = false,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-
   const clearOptions = () => {
     onChange(undefined);
   };
@@ -37,17 +43,26 @@ const Select: FC<SelectProps> = ({ value, onChange, options, placeholder }) => {
     >
       <span className={styles.placeholder}>{placeholder}</span>
       <span className={styles.value}>{value?.label}</span>
-      <button
-        className={styles['clear-btn']}
-        type="button"
-        onClick={(e) => {
-          e.stopPropagation();
-          clearOptions();
-        }}
+      {!topDirection && (
+        <button
+          className={styles['clear-btn']}
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            clearOptions();
+          }}
+        >
+          &times;
+        </button>
+      )}
+      {topDirection && (
+        <div className={`${styles.caret} ${isOpen ? styles.open : ''}`} />
+      )}
+      <ul
+        className={`${styles.options} ${isOpen ? styles.show : ''} ${
+          topDirection ? styles.top : ''
+        }`}
       >
-        &times;
-      </button>
-      <ul className={`${styles.options} ${isOpen ? styles.show : ''}`}>
         {value?.value && (
           <>
             <li className={`${styles['selected-option']} ${styles.option}`}>

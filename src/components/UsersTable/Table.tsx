@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { useQuery } from 'react-query';
 import getUsersData from '../../api/usersApi';
-import { natOptions, genderOptions } from '../../data/filterData';
+import { natOptions, genderOptions, rowOptions } from '../../data/filterData';
 import filterSearch from '../../utils/searchFilter';
 import spinner from '../../assets/svg/spinner.svg';
 
@@ -13,6 +13,7 @@ import Thead from './Thead';
 import UserRow from './UserRow';
 import Select from '../Select/Select';
 import Search from '../Search/Search';
+import Pagination from '../Pagination/Pagination';
 
 const Table: FC = () => {
   const [nationality, setNationality] = useState<
@@ -20,6 +21,10 @@ const Table: FC = () => {
   >();
   const [gender, setGender] = useState<(typeof genderOptions)[0] | undefined>();
   const [search, setSearch] = useState<string | undefined>('');
+  const [rowsPerPage, setRowsPerPage] = useState<(typeof rowOptions)[0] | undefined>(
+    rowOptions[0]
+  );
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const {
     data: usersData,
@@ -51,6 +56,25 @@ const Table: FC = () => {
     );
   }
 
+  let numberOfPages: number = 1;
+  let indexOfFirstRecord: number = 0;
+  let indexOfLastRecord: number = 0;
+
+  if (usersData && rowsPerPage) {
+    const nPages = Math.ceil(usersData.results.length / +rowsPerPage.value);
+    numberOfPages = nPages > 10 ? 10 : nPages;
+  }
+
+  if (rowsPerPage) {
+    indexOfLastRecord = +rowsPerPage.value * currentPage;
+    indexOfFirstRecord = indexOfLastRecord - +rowsPerPage.value;
+  }
+
+  const currentUsers = usersData?.results.slice(
+    indexOfFirstRecord,
+    indexOfLastRecord
+  );
+
   return (
     <div className={styles.container}>
       <Search value={search} onChange={setSearch} placeholder="Search" />
@@ -60,6 +84,7 @@ const Table: FC = () => {
           value={nationality}
           onChange={(o) => {
             setNationality(o);
+            setCurrentPage(1);
           }}
           placeholder="Nationality"
         />
@@ -68,6 +93,7 @@ const Table: FC = () => {
           value={gender}
           onChange={(o) => {
             setGender(o);
+            setCurrentPage(1);
           }}
           placeholder="Gender"
         />
@@ -82,12 +108,31 @@ const Table: FC = () => {
               </td>
             </tr>
           )}
-          {usersData &&
-            usersData.results.map((user: User) => (
+          {currentUsers &&
+            currentUsers.map((user: User) => (
               <UserRow user={user} key={user.phone} />
             ))}
         </tbody>
       </table>
+      <div className={styles.tfooter}>
+        <div />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={numberOfPages}
+          setCurrentPage={setCurrentPage}
+        />
+        <div className={styles['rows-select']}>
+          <span>Rows per page:</span>
+          <Select
+            options={rowOptions}
+            value={rowsPerPage}
+            onChange={(o) => {
+              setRowsPerPage(o);
+            }}
+            topDirection
+          />
+        </div>
+      </div>
     </div>
   );
 };
