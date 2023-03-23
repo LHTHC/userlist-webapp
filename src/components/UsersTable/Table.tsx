@@ -80,15 +80,6 @@ const Table: FC = () => {
       <Search value={search} onChange={setSearch} placeholder="Search" />
       <div className={styles.filters}>
         <Select
-          options={natOptions}
-          value={nationality}
-          onChange={(o) => {
-            setNationality(o);
-            setCurrentPage(1);
-          }}
-          placeholder="Nationality"
-        />
-        <Select
           options={genderOptions}
           value={gender}
           onChange={(o) => {
@@ -96,6 +87,15 @@ const Table: FC = () => {
             setCurrentPage(1);
           }}
           placeholder="Gender"
+        />
+        <Select
+          options={natOptions}
+          value={nationality}
+          onChange={(o) => {
+            setNationality(o);
+            setCurrentPage(1);
+          }}
+          placeholder="Nationality"
         />
       </div>
       <table className={styles.table}>
