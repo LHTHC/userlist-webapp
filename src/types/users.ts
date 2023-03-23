@@ -9,6 +9,7 @@ export interface User {
   location: { city: string };
   country: string;
   nat: string;
+  id: string;
   name: {
     first: string;
     last: string;

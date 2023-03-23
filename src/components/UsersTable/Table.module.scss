@@ -6,15 +6,19 @@
   border-radius: 40px;
   border: 1px solid $border-main;
   margin: 32px;
+  padding: 40px 30px;
   overflow-x: auto;
+  .filters {
+    display: flex;
+    gap: 8px;
+  }
   .table {
-    margin: 24px 32px;
+    margin-top: 24px;
     padding: 5px 12px;
     border-collapse: separate;
     border-spacing: 0px 8px;
     width: 100%;
     max-width: 1310px;
-    min-height: 604px;
     background-color: $bg-dark;
     border-radius: 16px;
     tbody {

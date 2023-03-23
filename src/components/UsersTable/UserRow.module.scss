@@ -1,7 +1,9 @@
 @use '../../styles/abstracts/colors' as *;
 
+$row-height: 64px;
+
 .user {
-  height: 64px;
+  height: $row-height;
   margin: 5px;
   padding: 0px 8px;
   background-color: $user-bg;
@@ -17,7 +19,7 @@
   .profile {
     display: flex;
     align-items: center;
-    height: 64px;
+    height: $row-height;
   }
   td {
     min-width: max-content;

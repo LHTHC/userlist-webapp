@@ -1,30 +1,37 @@
 import { FC, useState } from 'react';
 import { useQuery } from 'react-query';
 import getUsersData from '../../api/usersApi';
+import { natOptions, genderOptions } from '../../data/filterData';
 
 import styles from './Table.module.scss';
+
+import { User } from '../../types/users';
 
 import Thead from './Thead';
 import UserRow from './UserRow';
 import Select from '../Select/Select';
 
-const options = [
-  { label: 'BR', value: 'BR' },
-  { label: 'DE', value: 'DE' },
-  { label: 'FR', value: 'FR' },
-  { label: 'NZ', value: 'NZ' },
-  { label: 'UA', value: 'UA' },
-  { label: 'US', value: 'US' },
-];
-
 const Table: FC = () => {
-  const [nationality, setNationality] = useState<(typeof options)[0] | undefined>();
+  const [nationality, setNationality] = useState<
+    (typeof natOptions)[0] | undefined
+  >();
+  const [gender, setGender] = useState<(typeof genderOptions)[0] | undefined>();
 
   const {
     data: usersData,
     isLoading: usersIsLoading,
     error: userDataError,
-  } = useQuery(['users', nationality], () => getUsersData(nationality));
+  } = useQuery({
+    queryKey: ['users', nationality],
+    queryFn: () => getUsersData(nationality),
+    select: (data) => {
+      const copy = structuredClone(data);
+      if (gender) {
+        copy.results = data.results.filter((user) => user.gender === gender.value);
+      }
+      return copy;
+    },
+  });
 
   if (userDataError) {
     return (
@@ -37,14 +44,24 @@ const Table: FC = () => {
 
   return (
     <div className={styles.container}>
-      <Select
-        options={options}
-        value={nationality}
-        onChange={(o) => {
-          setNationality(o);
-        }}
-        placeholder="Nationality"
-      />
+      <div className={styles.filters}>
+        <Select
+          options={natOptions}
+          value={nationality}
+          onChange={(o) => {
+            setNationality(o);
+          }}
+          placeholder="Nationality"
+        />
+        <Select
+          options={genderOptions}
+          value={gender}
+          onChange={(o) => {
+            setGender(o);
+          }}
+          placeholder="Gender"
+        />
+      </div>
       <table className={styles.table}>
         <Thead />
         <tbody className={styles.tbody}>
@@ -54,7 +71,7 @@ const Table: FC = () => {
             </tr>
           )}
           {usersData &&
-            usersData.results.map((user) => (
+            usersData.results.map((user: User) => (
               <UserRow user={user} key={user.phone} />
             ))}
         </tbody>
