@@ -9,10 +9,11 @@ type SelectOption = {
 type SelectProps = {
   options: SelectOption[];
   value: SelectOption | undefined;
+  placeholder: string;
   onChange: (value: SelectOption | undefined) => void;
 };
 
-const Select: FC<SelectProps> = ({ value, onChange, options }) => {
+const Select: FC<SelectProps> = ({ value, onChange, options, placeholder }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const clearOptions = () => {
@@ -23,6 +24,10 @@ const Select: FC<SelectProps> = ({ value, onChange, options }) => {
     onChange(option);
   };
 
+  const filteredOptions = options.filter(
+    ({ value: optValue }) => optValue !== value?.value
+  );
+
   return (
     <div
       className={styles.container}
@@ -30,6 +35,7 @@ const Select: FC<SelectProps> = ({ value, onChange, options }) => {
       onClick={() => setIsOpen((prev) => !prev)}
       onBlur={() => setIsOpen(false)}
     >
+      <span className={styles.placeholder}>{placeholder}</span>
       <span className={styles.value}>{value?.label}</span>
       <button
         className={styles['clear-btn']}
@@ -42,7 +48,15 @@ const Select: FC<SelectProps> = ({ value, onChange, options }) => {
         &times;
       </button>
       <ul className={`${styles.options} ${isOpen ? styles.show : ''}`}>
-        {options.map((option) => (
+        {value?.value && (
+          <>
+            <li className={`${styles['selected-option']} ${styles.option}`}>
+              {value.value}
+            </li>
+            <div />
+          </>
+        )}
+        {filteredOptions.map((option) => (
           <li
             key={option.label}
             className={styles.option}

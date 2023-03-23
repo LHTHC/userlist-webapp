@@ -1,19 +1,30 @@
+@use '../../styles/abstracts/colors' as *;
+
 .container {
   display: flex;
   align-items: center;
-  margin: 30px;
   position: relative;
-  width: 200px;
-  height: 1.5em;
-  border: 0.05em solid #777;
-  gap: 0.5em;
-  border-radius: 0.25em;
+  margin: 30px;
+  padding: 7px 12px 7px 16px;
+  min-width: 100px;
+  width: fit-content;
+  height: 32px;
+  background-color: $bg-dark;
+  border-radius: 40px;
   outline: none;
+
   &:focus {
     border-color: aquamarine;
   }
   .value {
+    font-weight: 400;
     flex-grow: 1;
+  }
+  .placeholder {
+    color: $font-mute;
+    font-weight: 400;
+    line-height: 18px;
+    margin-right: 5px;
   }
   .clear-btn {
     background: none;
@@ -21,7 +32,8 @@
     border: none;
     outline: none;
     cursor: pointer;
-    font-size: 2em;
+    font-size: 35px;
+    line-height: 55px;
     &:focus,
     &:hover {
       color: #333;
@@ -30,21 +42,40 @@
   .options {
     display: none;
     position: absolute;
+    margin: 8px;
     overflow-y: auto;
-    max-height: 200px;
-    border: 0.05em solid #777;
-    border-radius: 0.25em;
-    width: 100%;
+    max-height: 350px;
+    border: 1px solid $options-border;
+    border-radius: 16px;
+    box-shadow: $options-shadow;
+    width: 90px;
     left: 0;
     top: calc(100% + 0.25em);
-    background-color: rgb(38, 30, 30);
+    background-color: $options-background;
     z-index: 100;
+    div {
+      width: 60%;
+      border-bottom: 1px solid $font-mute;
+      margin: 0 auto;
+    }
     &.show {
       display: block;
     }
+
     .option {
-      padding: 0.25em;
+      height: 40px;
+      margin: 8px;
+      padding: 10px 16px;
+      border-radius: 16px;
       cursor: pointer;
+      &.selected-option {
+        color: $option-selected;
+      }
+
+      &:hover {
+        background-color: $bg-dark;
+        color: $option-hover;
+      }
       .highlighted {
         color: black;
         background-color: azure;
