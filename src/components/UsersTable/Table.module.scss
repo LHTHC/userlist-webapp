@@ -1,14 +1,31 @@
 @use '../../styles/abstracts/colors' as *;
+@use '../../styles/abstracts/mixins' as *;
 
 .container {
-  max-width: 1376px;
+  width: 95vw;
   min-height: 600px;
   background-color: $container-bg;
   border-radius: 40px;
   border: 1px solid $border-main;
   margin: 32px auto 0;
   padding: 40px 30px;
-  overflow-x: auto;
+  overflow: auto;
+  @include scrollbar;
+  // &::-webkit-scrollbar {
+  //   width: 5px;
+  //   height: 15px;
+  // }
+  // &::-webkit-scrollbar-thumb {
+  //   border-radius: 10px;
+  //   border: 1px solid $border-orange;
+  // }
+  // &::-webkit-scrollbar-thumb:hover {
+  //   background: $border-orange;
+  // }
+  // &::-webkit-scrollbar-track {
+  //   border-radius: 10px;
+  //   background: rgba(0, 0, 0, 0.1);
+  // }
   .filters {
     display: flex;
     gap: 8px;
@@ -19,7 +36,6 @@
     border-collapse: separate;
     border-spacing: 0px 8px;
     width: 100%;
-    max-width: 1310px;
     background-color: $bg-dark;
     border-radius: 16px;
     tbody {

@@ -1,0 +1,19 @@
+@use './colors' as *;
+
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 15px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    border: 1px solid $border-orange;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: $border-orange;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.1);
+  }
+}
