@@ -26,8 +26,15 @@
       width: 100%;
     }
   }
-  th {
-    text-align: start;
+  .tfooter {
+    display: flex;
+    margin-top: 34px;
+    .rows-select {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-left: auto;
+    }
   }
 }
 

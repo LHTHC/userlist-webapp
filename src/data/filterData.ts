@@ -11,3 +11,9 @@ export const genderOptions = [
   { label: 'male', value: 'male' },
   { label: 'female', value: 'female' },
 ];
+
+export const rowOptions = [
+  { label: 10, value: 10 },
+  { label: 50, value: 50 },
+  { label: 100, value: 100 },
+];
