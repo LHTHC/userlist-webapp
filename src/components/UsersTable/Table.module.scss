@@ -28,11 +28,11 @@
   }
   .tfooter {
     display: flex;
+    justify-content: flex-end;
     align-items: center;
     margin-top: 34px;
 
     .rows-select {
-      margin-left: auto;
       display: flex;
       align-items: center;
       gap: 16px;
@@ -44,5 +44,11 @@
 @media screen and (min-width: 1440px) {
   .container {
     overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .container {
+    padding: 20px 10px;
   }
 }
