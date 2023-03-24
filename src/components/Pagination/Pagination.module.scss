@@ -3,9 +3,10 @@
 .pagination {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
   gap: 15px;
   position: relative;
-  transform: translateX(-330px);
+  transform: translateX(-340px);
   font-weight: 400;
   button {
     width: 36px;
@@ -27,5 +28,11 @@
 @media screen and (max-width: 768px) {
   .pagination {
     transform: translateX(-75%);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .pagination {
+    transform: translate(-5%);
   }
 }
